@@ -1,6 +1,11 @@
 // Cesium ion access token
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjNGU3MmU5ZS0zYWNhLTQ3OWUtOGY3OS0xNWJiODA0ODE0MGMiLCJpZCI6Mjc3NzA1LCJpYXQiOjE3NDAwNjQxNzR9.sNTxZaHE_9OY7KUYEzk_NV9pE-KxAdtAWylKSzstzlQ';
 
+// Get URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+const lat = parseFloat(urlParams.get('lat')) || 43.638778; // Default to Toronto
+const lng = parseFloat(urlParams.get('lng')) || -79.416750;
+
 // Initialize the Cesium Viewer
 const viewer = new Cesium.Viewer('cesiumContainer', {
     baseLayerPicker: false,
@@ -34,9 +39,9 @@ viewer.timeline.container.style.position = 'absolute';
 viewer.animation.container.style.bottom = '30px';
 viewer.animation.container.style.position = 'absolute';
 
-// Set the initial camera view to Toronto
+// Set the initial camera view to the specified location
 viewer.camera.flyTo({
-    destination: Cesium.Cartesian3.fromDegrees(-79.416750, 43.638778, 1000),  // Lowered height to 1000m
+    destination: Cesium.Cartesian3.fromDegrees(lng, lat, 300), // Closer view for patios
     orientation: {
         heading: Cesium.Math.toRadians(0),
         pitch: Cesium.Math.toRadians(-45),
