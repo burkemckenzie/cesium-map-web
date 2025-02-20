@@ -3,7 +3,7 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 // Get URL parameters
 const urlParams = new URLSearchParams(window.location.search);
-const lat = parseFloat(urlParams.get('lat')) || 43.638778; // Default to Toronto
+const lat = parseFloat(urlParams.get('lat')) || 43.638778;
 const lng = parseFloat(urlParams.get('lng')) || -79.416750;
 
 // Initialize the Cesium Viewer
@@ -39,15 +39,23 @@ viewer.timeline.container.style.position = 'absolute';
 viewer.animation.container.style.bottom = '30px';
 viewer.animation.container.style.position = 'absolute';
 
-// Set the initial camera view to the specified location
+// Set the initial camera view to look down at the location
 viewer.camera.flyTo({
-    destination: Cesium.Cartesian3.fromDegrees(lng, lat, 300), // Closer view for patios
+    destination: Cesium.Cartesian3.fromDegrees(lng, lat, 120), // 120 meters height
     orientation: {
-        heading: Cesium.Math.toRadians(0),
-        pitch: Cesium.Math.toRadians(-45),
-        roll: 0.0
-    }
+        heading: Cesium.Math.toRadians(0),    // Look north
+        pitch: Cesium.Math.toRadians(-90),    // Look straight down
+        roll: 0
+    },
+    duration: 0 // Instant camera movement
 });
+
+// Restrict camera tilt to maintain top-down perspective
+viewer.scene.screenSpaceCameraController.enableTilt = false;
+
+// Restrict zoom range
+viewer.scene.screenSpaceCameraController.minimumZoomDistance = 50;  // Min 50 meters
+viewer.scene.screenSpaceCameraController.maximumZoomDistance = 300; // Max 300 meters
 
 // Enable lighting effects
 viewer.scene.globe.enableLighting = true;
@@ -60,7 +68,6 @@ viewer.terrainShadows = Cesium.ShadowMode.ENABLED;
 viewer.scene.screenSpaceCameraController.enableRotate = true;
 viewer.scene.screenSpaceCameraController.enableTranslate = true;
 viewer.scene.screenSpaceCameraController.enableZoom = true;
-viewer.scene.screenSpaceCameraController.enableTilt = true;
 viewer.scene.screenSpaceCameraController.enableLook = true;
 
 // Load Toronto buildings tilesets
