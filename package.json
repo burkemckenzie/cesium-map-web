@@ -1,0 +1,8 @@
+{
+  "name": "cesium-map-web",
+  "version": "1.0.0",
+  "description": "Cesium map web files",
+  "dependencies": {
+    "cesium": "^1.111.0"
+  }
+} 
