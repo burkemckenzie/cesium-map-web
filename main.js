@@ -1,5 +1,3 @@
-import * as Cesium from 'cesium';
-
 // Cesium ion access token
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjNGU3MmU5ZS0zYWNhLTQ3OWUtOGY3OS0xNWJiODA0ODE0MGMiLCJpZCI6Mjc3NzA1LCJpYXQiOjE3NDAwNjQxNzR9.sNTxZaHE_9OY7KUYEzk_NV9pE-KxAdtAWylKSzstzlQ';
 
